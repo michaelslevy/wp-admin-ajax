@@ -20,7 +20,11 @@ function register_DLG_settings() {
 	register_setting( 'DLG-settings-group', 'option_etc' );
 }
 
+
 function DLG_settings_page() {
+		
+	dcf_get_react_files();
+	
 ?>
 <div class="wrap">
 <h1>Your Plugin Name</h1>
