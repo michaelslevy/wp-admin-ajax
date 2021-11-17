@@ -1,33 +1,33 @@
 <?php
 
 // create custom plugin settings menu
-add_action('admin_menu', 'my_cool_plugin_create_menu');
+add_action('admin_menu', 'DLG_create_menu');
 
-function my_cool_plugin_create_menu() {
+function DLG_create_menu() {
 
 	//create new top-level menu
-	add_menu_page('My Cool Plugin Settings', 'Cool Settings', 'administrator', __FILE__, 'my_cool_plugin_settings_page' , "dashicons-groups" );
+	add_menu_page('Local Government Settings', 'Local Governement Settings', 'administrator', __FILE__, 'DLG_settings_page' , "dashicons-groups" );
 
 	//call register settings function
-	add_action( 'admin_init', 'register_my_cool_plugin_settings' );
+	add_action( 'admin_init', 'register_DLG_settings' );
 }
 
 
-function register_my_cool_plugin_settings() {
+function register_DLG_settings() {
 	//register our settings
-	register_setting( 'my-cool-plugin-settings-group', 'new_option_name' );
-	register_setting( 'my-cool-plugin-settings-group', 'some_other_option' );
-	register_setting( 'my-cool-plugin-settings-group', 'option_etc' );
+	register_setting( 'DLG-settings-group', 'new_option_name' );
+	register_setting( 'DLG-settings-group', 'some_other_option' );
+	register_setting( 'DLG-settings-group', 'option_etc' );
 }
 
-function my_cool_plugin_settings_page() {
+function DLG_settings_page() {
 ?>
 <div class="wrap">
 <h1>Your Plugin Name</h1>
 
 <form method="post" action="options.php">
-    <?php settings_fields( 'my-cool-plugin-settings-group' ); ?>
-    <?php do_settings_sections( 'my-cool-plugin-settings-group' ); ?>
+    <?php settings_fields( 'DLG-settings-group' ); ?>
+    <?php do_settings_sections( 'DLG-settings-group' ); ?>
     <table class="form-table">
         <tr valign="top">
         <th scope="row">New Option Name</th>
