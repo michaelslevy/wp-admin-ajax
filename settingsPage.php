@@ -23,7 +23,7 @@ function register_DLG_settings() {
 
 function DLG_settings_page() {
 		
-	dcf_get_react_files();
+	dlg_get_react_files();
 	
 ?>
 <div class="wrap">

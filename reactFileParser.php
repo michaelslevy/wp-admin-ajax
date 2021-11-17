@@ -1,18 +1,18 @@
 <?php
 
-function dcf_getExtension($file){
+function dlg_getExtension($file){
 	$array = explode('.', $file);
 	return $extension = end($array);
 }	
 
-function dcf_retrieve_files_from_directory($dir,$ext){
+function dlg_retrieve_files_from_directory($dir,$ext){
 	
 	$base_path="../wp-content/plugins/DovetailLocalGovernment/admin/build/static/";
 	$reactFiles=scandir($base_path.$dir);
 	
 	$toLoad=array();
 	foreach($reactFiles as $f){
-		if(dcf_getExtension($f)==$ext){
+		if(dlg_getExtension($f)==$ext){
 				array_push($toLoad, $f);
 		}	
 	}	
@@ -21,7 +21,7 @@ function dcf_retrieve_files_from_directory($dir,$ext){
 
 }	
 
-function dcf_sort_JS($js_files){
+function dlg_sort_JS($js_files){
 	
 	$js=array( "vendor"=>array());
 	foreach($js_files as $j){
@@ -36,17 +36,24 @@ function dcf_sort_JS($js_files){
 	return $js;
 }	
 
-function dcf_get_react_files(){
+function dlg_enqueue_admin( $hook ) {
+	
+	//echo $hook;
+    if ( 'toplevel_page_DovetailLocalGovernment/settingsPage' == $hook ) {
+		wp_enqueue_script( 'my_custom_script', plugin_dir_url( __FILE__ ) . 'myscript.js', array(), '1.0' );
+	 
+    }
+    
+}
+add_action( 'admin_enqueue_scripts', 'dlg_enqueue_admin' );
+
+function dlg_get_react_files(){
 	
 	$filesToLoad=array();
-	$filesToLoad["css"]=dcf_retrieve_files_from_directory("css","css");
+	$filesToLoad["css"]=dlg_retrieve_files_from_directory("css","css");
 	
-	$js_files=dcf_retrieve_files_from_directory("js", "js");
-	$filesToLoad["js"]=dcf_sort_JS($js_files);
-	
-	echo "<pre>";
-	print_r($filesToLoad);
-	echo "</pre>";
+	$js_files=dlg_retrieve_files_from_directory("js", "js");
+	$filesToLoad["js"]=dlg_sort_JS($js_files);
 
 }	
 
