@@ -10,8 +10,8 @@ function DLG_create_menu() {
 
 	//call register settings function
 	add_action( 'admin_init', 'register_DLG_settings' );
+	
 }
-
 
 function register_DLG_settings() {
 	//register our settings
@@ -20,11 +20,31 @@ function register_DLG_settings() {
 	register_setting( 'DLG-settings-group', 'option_etc' );
 }
 
+add_action( 'admin_enqueue_scripts', 'enqueue_admin' );	
+function enqueue_admin( $hook ) {
+	
+	$reactFileParser=new DLG_ReactFileParser();
+	$files=$reactFileParser->filesToLoad;
+	$pageHook="toplevel_page_DovetailLocalGovernment/settingsPage";
+
+	if ( $pageHook == $hook ) {
+		
+		for($x=0; $x<count($files["css"]); $x++){
+			wp_enqueue_style( "DLG-".($x+1), $files["css"][$x], array(), 1.0 );
+		}	
+		
+		wp_enqueue_script( 'DLG-Runtime',$files["js"]["runtime"], array(), '1.0', false );
+		wp_enqueue_script( 'DLG-Main',$files["js"]["main"], array("DLG-Runtime"), '1.0' , true);
+		for($x=0; $x<count($files["js"]["vendor"]); $x++){
+			wp_enqueue_script( "DLG-Vendor-".($x+1), $files["js"]["vendor"][$x], array("DLG-Runtime","DLG-Main"), 1.0, true );
+		}	
+	}
+	
+}
+
 
 function DLG_settings_page() {
-		
-	dlg_get_react_files();
-	
+			
 ?>
 <div class="wrap">
 <h1>Your Plugin Name</h1>
@@ -35,7 +55,7 @@ function DLG_settings_page() {
     <table class="form-table">
         <tr valign="top">
         <th scope="row">New Option Name</th>
-        <td><input type="text" name="new_option_name" value="<?php echo esc_attr( get_option('new_option_name') ); ?>" /></td>
+        <td><input type="text" id="new_option_name" name="new_option_name" value="<?php echo esc_attr( get_option('new_option_name') ); ?>" /></td>
         </tr>
          
         <tr valign="top">
@@ -50,6 +70,8 @@ function DLG_settings_page() {
     </table>
     
     <?php submit_button(); ?>
+	
+	<div id="root"></div>
 
 </form>
 </div>
