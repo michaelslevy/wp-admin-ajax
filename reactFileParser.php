@@ -1,4 +1,5 @@
 <?php
+/* Retrieve files stored in build folder */
 
 class DLG_ReactFileParser {
 	

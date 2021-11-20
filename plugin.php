@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Plugin Name: Dovetail Local Government
+ * Plugin Name: WP Admin Ajax
  */
  
- require "ajax.php"; 
- require "reactFileParser.php"; 
- require "settingsPage.php";
+ require "ajax.php"; //wp ajax actions
+ require "reactFileParser.php"; //loads files from build folder
+ require "settingsPage.php"; //wp settings page code
  
 ?>
