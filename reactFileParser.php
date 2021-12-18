@@ -21,8 +21,10 @@ class DLG_ReactFileParser {
 
 	function retrieve_files_from_directory($dir,$ext){
 		
-		$base_path="../wp-content/plugins/DovetailLocalGovernment/admin/build/static/";
-		$LoadBase=site_url()."/wp-content/plugins/DovetailLocalGovernment/admin/build/static/".$dir."/";
+		$wpContentDirectory=basename( plugin_dir_path(  dirname( __FILE__ , 2 ) ) );
+
+		$base_path=WP_CONTENT_DIR."/plugins/DovetailLocalGovernment/admin/build/static/";
+		$LoadBase=site_url()."/".$wpContentDirectory."/plugins/DovetailLocalGovernment/admin/build/static/".$dir."/";
 		$reactFiles=scandir($base_path.$dir);
 		
 		$toLoad=array();
