@@ -11,6 +11,7 @@ function enqueue_admin( $hook ) {
 	$files=$reactFileParser->filesToLoad;
 	$pageHook="toplevel_page_DovetailLocalGovernment/settingsPage";
 
+
 	if ( $pageHook == $hook ) {
 		
 		for($x=0; $x<count($files["css"]); $x++){

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: WP Admin Ajax
+ * Plugin Name: Dovetail Local Government
  */
  
  require "ajax.php"; //wp ajax actions
