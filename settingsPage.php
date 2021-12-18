@@ -6,24 +6,26 @@
 */
 add_action( 'admin_enqueue_scripts', 'enqueue_admin' );	
 function enqueue_admin( $hook ) {
-	
+		
 	$reactFileParser=new DLG_ReactFileParser();
 	$files=$reactFileParser->filesToLoad;
-	$pageHook="toplevel_page_DovetailLocalGovernment/settingsPage";
+	$pageHook="toplevel_page_wp-admin-ajax-master/settingsPage";
 
 
 	if ( $pageHook == $hook ) {
-		
+				
 		for($x=0; $x<count($files["css"]); $x++){
 			wp_enqueue_style( "DLG-".($x+1), $files["css"][$x], array(), 1.0 );
 		}	
-		
 		wp_enqueue_script( 'DLG-Runtime',$files["js"]["runtime"], array(), '1.0', false );
-		wp_enqueue_script( 'DLG-Main',$files["js"]["main"], array("DLG-Runtime"), '1.0' , true);
+		
 		for($x=0; $x<count($files["js"]["vendor"]); $x++){
-			wp_enqueue_script( "DLG-Vendor-".($x+1), $files["js"]["vendor"][$x], array("DLG-Runtime","DLG-Main"), 1.0, true );
+			wp_enqueue_script( "DLG-Vendor-".($x+1), $files["js"]["vendor"][$x], array(), 1.0, true );
 		}	
-	}
+		wp_enqueue_script( 'DLG-Main',$files["js"]["main"], array(), '1.0' , true);
+	} else {
+		echo "PAGE HOOK NOT FOUND | HOOK FOUND: $hook";
+	}	
 	
 }
 
@@ -34,7 +36,7 @@ add_action('admin_menu', 'DLG_create_menu');
 function DLG_create_menu() {
 
 	//create new top-level menu
-	add_menu_page('Local Government Settings', 'Local Governement Settings', 'administrator', __FILE__, 'DLG_settings_page' , "dashicons-groups" );
+	add_menu_page('Local Government Settings', 'Admin Ajax Settings', 'administrator', __FILE__, 'DLG_settings_page' , "dashicons-groups" );
 
 	//call register settings function
 	add_action( 'admin_init', 'register_DLG_settings' );

@@ -23,8 +23,8 @@ class DLG_ReactFileParser {
 		
 		$wpContentDirectory=basename( plugin_dir_path(  dirname( __FILE__ , 2 ) ) );
 
-		$base_path=WP_CONTENT_DIR."/plugins/DovetailLocalGovernment/admin/build/static/";
-		$LoadBase=site_url()."/".$wpContentDirectory."/plugins/DovetailLocalGovernment/admin/build/static/".$dir."/";
+		$base_path=WP_CONTENT_DIR."/plugins/wp-admin-ajax-master/admin/build/static/";
+		$LoadBase=site_url()."/".$wpContentDirectory."/plugins/wp-admin-ajax-master/admin/build/static/".$dir."/";
 		$reactFiles=scandir($base_path.$dir);
 		
 		$toLoad=array();
