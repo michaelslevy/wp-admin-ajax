@@ -19,6 +19,7 @@ class DLG_ReactFileParser {
 		return $extension = end($array);
 	}	
 
+	//load packages from build directory.
 	function retrieve_files_from_directory($dir,$ext){
 		
 		$wpContentDirectory=basename( plugin_dir_path(  dirname( __FILE__ , 2 ) ) );
@@ -38,7 +39,8 @@ class DLG_ReactFileParser {
 		return($toLoad);
 
 	}	
-
+	
+	//React requires Runtime-main.js, main.js, and vendor js;
 	function sort_JS($js_files){
 		
 		$js=array( "vendor"=>array());

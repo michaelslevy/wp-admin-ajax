@@ -9,7 +9,7 @@ function enqueue_admin( $hook ) {
 		
 	$reactFileParser=new DLG_ReactFileParser();
 	$files=$reactFileParser->filesToLoad;
-	$pageHook="toplevel_page_wp-admin-ajax-master/settingsPage";
+	$pageHook="toplevel_page_wp-admin-ajax-master/settingsPage"; //IMPOTANT: Make sure this matches your page hook!
 
 
 	if ( $pageHook == $hook ) {
@@ -23,9 +23,8 @@ function enqueue_admin( $hook ) {
 			wp_enqueue_script( "DLG-Vendor-".($x+1), $files["js"]["vendor"][$x], array(), 1.0, true );
 		}	
 		wp_enqueue_script( 'DLG-Main',$files["js"]["main"], array(), '1.0' , true);
-	} else {
-		echo "PAGE HOOK NOT FOUND | HOOK FOUND: $hook";
-	}	
+		
+	}
 	
 }
 
